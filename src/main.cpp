@@ -24,6 +24,9 @@ void loop()
   if (SerialPort.available())
   {
     char number = SerialPort.read();
+    if (number == '0') {
+      digitalWrite(LED, LOW);
+    }
     if (number == '1') {
       digitalWrite(LED, HIGH);
     }
