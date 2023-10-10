@@ -6,30 +6,31 @@
 HardwareSerial SerialPort(2); // use UART2
 
 char number  = ' ';
-int LED = 15;
 
-void setup(){
+void setup()
+{
   // Start serial with platform baudrate/monitor speed
   Serial.begin(115200);
-  init_esp(); // Initialize ESP NOW protocol
-  Serial.println("Ready.");
 
   // Initiate UART2 for Intermediate ESP32
   SerialPort.begin(115200, SERIAL_8N1, 16, 17);
-  pinMode(LED, OUTPUT);
-}
 
-void loop()
-{
+  // Check if the data has received yet to initiate the ESP-NOW protocol
   if (SerialPort.available())
   {
     char number = SerialPort.read();
-    if (number == '0') {
-      digitalWrite(LED, LOW);
+    if (number == '0')
+    {
+      Serial.println("Disconnected with the Middle.");
     }
-    if (number == '1') {
-      digitalWrite(LED, HIGH);
+    if (number == '1')
+    {
+      // Initialize ESP-NOW protocol
+      init_esp();
+      Serial.println("Connected to the Middle.");
     }
   }
 }
+
+void loop(){}
 
