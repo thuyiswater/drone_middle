@@ -35,7 +35,7 @@ void loop(){
       } else if (data == 3){
         Throttle = 150;
       } else if (data == 4){
-        Throttle = 200;
+        Throttle = 2000;
       }
   } 
   int ControlPWM = map(Throttle, 0, 1023, 0 ,100);
