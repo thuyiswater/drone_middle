@@ -7,13 +7,13 @@
 uint8_t slaveAddress[] = {0xB0, 0xA7, 0x32, 0x16, 0x1E, 0x24};
 
 // PMK and LMK keys
-static const char* PMK_KEY_STR = "AHL3T";
-static const char* LMK_KEY_STR = "SON DINH VU";
+static const char* PMK_KEY_STR = "_A_H_L_T_T_T_ED3";
+static const char* LMK_KEY_STR = "_SON_DINH_VU_ED3";
 
 // Define a testing message structure
 typedef struct {
   // uint8_t a;
-  uint8_t b;
+  uint8_t button;
 } UARTmessage;
  
 // Create a testing data object
@@ -75,7 +75,7 @@ void sendingUART_throughESPNOW()
 
   // Format structured UART data
   // UARTData.a = data1;
-  UARTData.b = data2;
+  UARTData.button = data2;
   
   // Send message via ESP-NOW
   esp_err_t result = esp_now_send(slaveAddress, (uint8_t *) &UARTData, sizeof(UARTData));
