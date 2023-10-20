@@ -12,12 +12,11 @@ static const char* LMK_KEY_STR = "_SON_DINH_VU_ED3";
 
 // Define a testing message structure
 typedef struct {
-  // uint8_t a;
-  uint8_t button;
-} UARTmessage;
+  int8_t joystick;
+} UART_receivedMessage;
  
 // Create a testing data object
-UARTmessage UARTData;
+UART_receivedMessage UART_receivedData;
  
 // Create a slave peer object
 esp_now_peer_info_t slavePeer;
@@ -67,18 +66,11 @@ void init_espnow_sender()
  
 void sendingUART_throughESPNOW()
 { 
-  // 
-  // static unsigned long lastEventTime = millis();
-  // static const unsigned long EVENT_INTERVAL_MS = 5000;
-  // if ((millis() - lastEventTime) > EVENT_INTERVAL_MS) {
-  //   lastEventTime = millis();
-
   // Format structured UART data
-  // UARTData.a = data1;
-  UARTData.button = data2;
+  UART_receivedData.joystick = data2;
   
   // Send message via ESP-NOW
-  esp_err_t result = esp_now_send(slaveAddress, (uint8_t *) &UARTData, sizeof(UARTData));
+  esp_err_t result = esp_now_send(slaveAddress, (uint8_t *) &UART_receivedData, sizeof(UART_receivedData));
   
   if (result == ESP_OK)
   {
