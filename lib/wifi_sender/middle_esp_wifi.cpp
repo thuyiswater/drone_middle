@@ -72,13 +72,12 @@ void sendingUART_throughESPNOW()
   // Send message via ESP-NOW
   esp_err_t result = esp_now_send(slaveAddress, (uint8_t *) &UART_receivedData, sizeof(UART_receivedData));
   
-  if (result == ESP_OK)
-  {
-    Serial.println("Sending is CONFIRMED!");
-  }
-  else
-  {
-    Serial.println("Sending is ERROR...");
-  }
-  delay(20);
+  // if (result == ESP_OK)
+  // {
+  //   Serial.println("Sending is CONFIRMED!");
+  // }
+  // else
+  // {
+  //   Serial.println("Sending is ERROR...");
+  // }
 }
