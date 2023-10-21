@@ -1,11 +1,8 @@
 #include <HardwareSerial.h>
-#include "../wifi_sender/middle_esp_wifi.h"
 
-// HardwareSerial SerialPort1(1); // use UART1
 HardwareSerial SerialPort2(2); // use UART2
 
-// int8_t data1;
-uint8_t data2;
+int8_t data1, data2, data3;
 
 void init_UART()
 {
@@ -18,29 +15,15 @@ void init_UART()
 }
 
 void receiveUART()
-{
-  // if(SerialPort1.available()) // Check whether data is sent from the Master through UART1
-  // {
-  //   data1 = SerialPort1.read(); // Read the data sent
-  //   Serial.printf("%d\n", data1); // Print out data
-  // }
-  // else
-  // {
-  //   data1 = 0;
-  //   Serial.printf("%d\n", data1); // Print out data
-  //   delay(20);
-  // }
-  
+{  
   if (SerialPort2.available()) // Check whether data is sent from the Master through UART2
   {
-    data2 = SerialPort2.read(); // Read the data sent
-    Serial.printf("%d\n", data2); // Print out data
-    delay(20);
-  }
-  else
-  {
-    data2 = 0;
-    Serial.printf("%d\n", data2); // Print out data
-    delay(20);
+    data1 = SerialPort2.read(); // Read the data sent
+    delay(10);
+    data2 = SerialPort2.read();
+    delay(10);
+    data3 = SerialPort2.read();
+    delay(10);
+    Serial.printf("%d   %d   %d\n", data1, data2, data3); // Print out data
   }
 }
