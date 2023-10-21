@@ -12,7 +12,9 @@ static const char* LMK_KEY_STR = "_SON_DINH_VU_ED3";
 
 // Define a testing message structure
 typedef struct {
-  int8_t joystick;
+  int8_t LeftY;
+  int8_t RightX;
+  int8_t RightY;
 } UART_receivedMessage;
  
 // Create a testing data object
@@ -67,7 +69,9 @@ void init_espnow_sender()
 void sendingUART_throughESPNOW()
 { 
   // Format structured UART data
-  UART_receivedData.joystick = data2;
+  UART_receivedData.LeftY = LJSY;
+  UART_receivedData.RightX = RJSX;
+  UART_receivedData.RightY = RJSY;
   
   // Send message via ESP-NOW
   esp_err_t result = esp_now_send(slaveAddress, (uint8_t *) &UART_receivedData, sizeof(UART_receivedData));

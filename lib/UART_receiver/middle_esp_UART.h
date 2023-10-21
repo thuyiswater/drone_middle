@@ -1,7 +1,6 @@
 #pragma once
 
-// extern int8_t data1;
-extern uint8_t data2;
+extern int8_t LJSY, RJSX, RJSY;
 
 void init_UART();
 void receiveUART();
