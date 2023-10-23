@@ -12,6 +12,7 @@ static const char* LMK_KEY_STR = "_SON_DINH_VU_ED3";
 
 // Define a testing message structure
 typedef struct {
+  int8_t LeftX;
   int8_t LeftY;
   int8_t RightX;
   int8_t RightY;
@@ -69,6 +70,7 @@ void init_espnow_sender()
 void sendingUART_throughESPNOW()
 { 
   // Format structured UART data
+  UART_receivedData.LeftX = LJSX;
   UART_receivedData.LeftY = LJSY;
   UART_receivedData.RightX = RJSX;
   UART_receivedData.RightY = RJSY;

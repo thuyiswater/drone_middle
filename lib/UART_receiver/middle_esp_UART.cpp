@@ -2,7 +2,7 @@
 
 HardwareSerial SerialPort2(2); // use UART2
 
-int8_t LJSY, RJSX, RJSY;
+int8_t LJSX, LJSY, RJSX, RJSY;
 
 void init_UART()
 {
@@ -18,12 +18,11 @@ void receiveUART()
 {  
   if (SerialPort2.available()) // Check whether data is sent from the Master through UART2
   {
-    LJSY = SerialPort2.read(); // Read the data sent
-    delay(10);
+    // Read the data sent
+    LJSX = SerialPort2.read();
+    LJSY = SerialPort2.read();
     RJSX = SerialPort2.read();
-    delay(10);
     RJSY = SerialPort2.read();
-    delay(10);
-    Serial.printf("%d   %d   %d\n", LJSY, RJSX, RJSY); // Print out data
+    Serial.printf("%d   %d   %d   %d\n", LJSX, LJSY, RJSX, RJSY); // Print out data
   }
 }
