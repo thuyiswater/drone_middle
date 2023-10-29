@@ -1,21 +1,22 @@
 #include <Arduino.h>
 
-#include "../lib/wifi_sender/middle_esp_wifi.h"
-#include "../lib/UART_receiver/middle_esp_UART.h"
+#include <Middle_esp_UART.h>
+#include <Middle_esp_wifi.h>
 
 void setup()
 {
-  // Set up UART 1 & 2 for middle ESP32
+  // Set up UART 2 for Middle ESP32
   init_UART();
-  // Set up EPS-NOW for middle ESP32
-  init_espnow_sender();
+
+  // Set up EPS-NOW for Middle ESP32
+  init_ESPNOW_sender();
 }
 
 void loop()
 {
-  // Receiving UART from master ESP32
+  // Receiving UART from Master ESP32
   receiveUART();
 
-  // Sending UART data from middle to slave
+  // Sending UART data from Middle to Slave
   sendingUART_throughESPNOW();
 }

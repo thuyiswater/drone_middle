@@ -1,8 +1,6 @@
 #include <HardwareSerial.h>
 
-HardwareSerial SerialPort2(2); // use UART2
-
-int8_t LJSX, LJSY, RJSX, RJSY;
+int8_t LJSY, RJSX, RJSY, L1, R1;
 
 void init_UART()
 {
@@ -11,18 +9,19 @@ void init_UART()
   // SerialPort1.begin(115200,SERIAL_8N1, 4, 2);
 
   // Initiate UART2 for Intermediate ESP32
-  SerialPort2.begin(115200, SERIAL_8N1, 16, 17);
+  Serial2.begin(115200, SERIAL_8N1, 16, 17);
 }
 
 void receiveUART()
 {  
-  if (SerialPort2.available()) // Check whether data is sent from the Master through UART2
+  if (Serial2.available()) // Check whether data is sent from the Master through UART2
   {
     // Read the data sent
-    LJSX = SerialPort2.read();
-    LJSY = SerialPort2.read();
-    RJSX = SerialPort2.read();
-    RJSY = SerialPort2.read();
-    Serial.printf("%d   %d   %d   %d\n", LJSX, LJSY, RJSX, RJSY); // Print out data
+    LJSY = Serial2.read();
+    RJSX = Serial2.read();
+    RJSY = Serial2.read();
+    L1 = Serial2.read();
+    R1 = Serial2.read();
+    Serial.printf("%d   %d   %d   %d   %d\n", LJSY, RJSX, RJSY, L1, R1); // Print out data
   }
 }
