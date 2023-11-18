@@ -1,5 +1,4 @@
 #include <Arduino.h>
-
 #include <Middle_esp_UART.h>
 #include <Middle_esp_wifi.h>
 
@@ -16,6 +15,8 @@ void loop()
 {
   // Receiving UART from Master ESP32
   receiveUART();
+
+  Print_PS4_Value();
 
   // Sending UART data from Middle to Slave
   sendingUART_throughESPNOW();

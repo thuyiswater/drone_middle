@@ -1,9 +1,14 @@
 #include <esp_now.h>
+#include <esp_wifi.h>
 #include <WiFi.h>
 #include <Middle_esp_UART.h>
  
+unsigned long startTime;
+
 // MAC Address of the receiver - Slave ESP32
 uint8_t slaveAddress[] = {0xB0, 0xA7, 0x32, 0x16, 0x1E, 0x24};
+
+uint8_t New_MAC_Address[] = {0x48, 0xE7, 0x29, 0x9F, 0xDD, 0xD4};
 
 // PMK and LMK keys
 static const char* PMK_KEY_STR = "_A_H_L_T_T_T_ED3";
@@ -23,7 +28,7 @@ typedef struct {
   int8_t Long;
   int8_t Lat;
 } GPS_receivedMessage;
- 
+
 // Create an object for UART
 UART_receivedMessage UART_receivedData;
 
@@ -53,7 +58,12 @@ void init_ESPNOW_sender()
 { 
   // Set Middle ESP32 as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
- 
+  
+  esp_wifi_set_ps(WIFI_PS_NONE);
+
+  esp_wifi_set_mac(WIFI_IF_STA, New_MAC_Address);
+
+
   // Initilize ESP-NOW
   if (esp_now_init() != ESP_OK)
   {
@@ -98,9 +108,9 @@ void sendingUART_throughESPNOW()
   UART_receivedData.RightY = RJSY;
   UART_receivedData.Left1 = L1;
   UART_receivedData.Right1 = R1;
-  
+
   // Send message via ESP-NOW
-  esp_err_t result = esp_now_send(slaveAddress, (uint8_t *) &UART_receivedData, sizeof(UART_receivedData));
+  esp_now_send(slaveAddress, (uint8_t *) &UART_receivedData, sizeof(UART_receivedData));
   
   // if (result == ESP_OK)          /// DEBUG ONLY ///
   // {
