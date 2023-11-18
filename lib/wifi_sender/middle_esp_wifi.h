@@ -1,4 +1,4 @@
 #pragma once
 
-void init_espnow_sender();
+void init_ESPNOW_sender();
 void sendingUART_throughESPNOW();
